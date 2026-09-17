@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python scripts/read-profile.py:*)",
+      "Bash(python3 scripts/read-profile.py:*)",
+      "Bash(python scripts/verify-plan.py:*)",
+      "Bash(python3 scripts/verify-plan.py:*)",
+      "Bash(python -m unittest:*)",
+      "Bash(python3 -m unittest:*)",
+      "Bash(node --test:*)"
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Apply bookmark plan</title>
+<style>
+  body { font: 14px/1.5 system-ui, sans-serif; max-width: 52rem; margin: 2rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.3rem; }
+  pre { background: #f4f4f4; padding: .75rem; white-space: pre-wrap; max-height: 24rem; overflow: auto; }
+  .ok { color: #0a6b2d; font-weight: 600; }
+  .bad { color: #a40e0e; font-weight: 600; }
+  button { font: inherit; padding: .4rem 1rem; }
+</style>
+</head>
+<body>
+<h1>Apply bookmark plan</h1>
+<p>Reads <code>target.json</code> from this extension's folder, checks that Chrome still holds the
+tree it was built from, simulates the run, and only then lets you apply it.</p>
+
+<h2>1. Check</h2>
+<div id="check">Checking…</div>
+
+<h2>2. Simulate</h2>
+<div id="simulate">Waiting for the check.</div>
+
+<h2>3. Apply</h2>
+<p><label><input type="checkbox" id="resume"> Resume after an interrupted run (skips the exact
+snapshot match; every planned node must still exist)</label></p>
+<p><label><input type="checkbox" id="understand"> I have a backup of the profile's bookmark files
+and understand this changes the bookmarks synced to my Google account</label></p>
+<button id="apply" disabled>Apply</button>
+<div id="result"></div>
+
+<script type="module" src="apply.js"></script>
+</body>
+</html>

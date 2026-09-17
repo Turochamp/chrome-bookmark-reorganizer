@@ -1,0 +1,7 @@
+# Personal: your bookmarks, browsing history summary, rules and Claude settings
+working/
+extension/target.json
+bookmark-rules.md
+.claude/settings.local.json
+
+__pycache__/

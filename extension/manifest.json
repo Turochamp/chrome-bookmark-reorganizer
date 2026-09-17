@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Bookmark plan applier",
+  "version": "1.0.0",
+  "description": "Applies target.json from apply-plan.py --target through the bookmarks API, so sync sees real moves.",
+  "minimum_chrome_version": "134",
+  "permissions": ["bookmarks"],
+  "action": { "default_title": "Apply bookmark plan" },
+  "background": { "service_worker": "background.js" }
+}
