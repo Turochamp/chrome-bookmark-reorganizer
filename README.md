@@ -1,14 +1,16 @@
 # Chrome Bookmark Reorganizer
 
-A Claude Code project that reorganizes a Chrome profile's bookmarks from a plan you review.
+A Claude Code project that reorganizes a Chrome profile's bookmarks. Not an auto-sorter,
+not a Chrome extension that tidies behind your back. Claude proposes a plan, you edit it,
+a script checks it, and Chrome applies it.
 
-Claude reads your bookmarks and how often you use them, then writes a plan: which bookmark
-goes where, what gets merged, what the bookmarks bar looks like. You read the plan, a
-script checks it, and a small Chrome extension applies it through Chrome's own bookmarks
-API, so sync carries the result to your other devices.
+Claude reads your bookmarks and how often you use them, then writes a plan. It says where
+each bookmark goes, what gets merged and what the bar looks like. A small Chrome extension
+applies it through Chrome's own bookmarks API, so sync carries the result to your other
+devices.
 
-The scripts and the extension make no decisions. Every judgment is a line in the plan,
-and every line is yours to change before anything touches Chrome.
+The scripts and the extension make no decisions. Every decision is a line in the plan,
+and you can change any of them before Chrome is touched.
 
 ## Requirements
 
@@ -34,8 +36,8 @@ On macOS, use `python3` wherever this README says `python`.
 ## Setup: your rules
 
 Everyone wants a different bookmarks bar, so this repo ships no rules of its own. Run
-`/setup` in Claude Code. It reads your profile and walks you through a few questions,
-each with a suggestion drawn from your own bookmarks and history:
+`/setup` in Claude Code. It reads your profile and asks seven questions, each with a
+suggested answer based on your bookmarks and history:
 
 1. **Bar shape**: how many top-level folders, and how deep they may go
 2. **Bar order**: alphabetical, by use, or an order you choose
@@ -47,9 +49,9 @@ each with a suggestion drawn from your own bookmarks and history:
 7. **Startup tabs**: optional advice, outside the plan
 
 The answers land in `bookmark-rules.md` next to `CLAUDE.md`. The file is gitignored, so
-your rules stay on your machine. `bookmark-rules.example.md` shows its shape. Its
-front block holds the limits the scripts enforce, and the text below it holds your taste,
-which Claude follows. Edit it by hand or run `/setup` again.
+your rules stay on your machine. `bookmark-rules.example.md` shows its shape. The block
+at the top sets the limits the scripts enforce. Below it you describe your taste, and
+Claude follows that when planning. Edit it by hand or run `/setup` again.
 
 ## How a run works
 
@@ -65,9 +67,9 @@ python scripts/verify-plan.py  --plan working/plan.tsv --post --profile Default
 Run the scripts from the repo root.
 
 - **`read-profile.py`** copies the profile's bookmarks to `working/snapshot.json` and
-  writes `working/manifest.tsv`: one row per bookmark with its folder, its visits and the
-  number of days it was used in Chrome's retained history. It only reads, and Chrome may
-  be running.
+  writes `working/manifest.tsv`, with one row per bookmark giving its folder, its visits and the
+  number of days it was used in Chrome's retained history. It only reads, so Chrome can
+  stay open.
 - **`verify-plan.py`** checks the plan before anything is written. Every bookmark is
   accounted for once, no ids are invented, the bar stays within your limits, no protected
   folder is touched and no folder is left empty. It prints the resulting tree. Nothing
@@ -93,7 +95,7 @@ are in under Profile Path. A full path works too.
 
 ## Applying with the extension
 
-1. Once: open `chrome://extensions`, turn on Developer mode, choose Load unpacked, pick
+1. The first time, open `chrome://extensions`, turn on Developer mode, choose Load unpacked, pick
    the `extension/` folder and pin its icon.
 2. Click the icon. The page checks that Chrome still holds the tree the target was built
    from, then runs the whole change in memory. Both checks must pass before Apply is enabled.
@@ -113,7 +115,7 @@ A signed-in profile keeps two bookmark files, and Chrome shows them merged:
 Sync rewrites the account store from Google's servers. Editing it on disk is soon undone,
 and editing the device store instead leaves the old tree beside the new one, with every
 folder shown twice. The extension makes real moves through Chrome's bookmarks API, so
-sync treats them as moves. It then empties the device store, so nothing appears twice.
+sync treats them as moves. Afterwards it empties the device store, so nothing appears twice.
 
 `apply-plan.py` refuses to run when a bookmark exists only in the device store and the
 plan does not keep it.
@@ -130,8 +132,8 @@ the bookmarks in Chrome's bookmark manager.
 `extension/target.json` and `bookmark-rules.md` are personal too. All three are
 gitignored. Don't commit them, and don't paste them into issues.
 
-Claude reads the manifest while it plans, so your bookmark titles, URLs and visit counts go
-to Anthropic's API as part of your Claude Code session.
+While it plans, Claude sends your bookmark titles, URLs and visit counts to Anthropic's API
+as part of your Claude Code session.
 
 ## Plan file format
 
@@ -167,8 +169,8 @@ To replay your own profile through the extension's logic without touching Chrome
 `REPLAY_BACKUP=working/backup/<timestamp> node --test tests/reconcile.test.mjs`. It also
 checks that your protected folders come through unchanged.
 
-`docs/adr/` records the two decisions most likely to surprise you: why there is no
-file-edit mode, and why the repo ships no rules.
+`docs/adr/` explains why there is no file-edit mode and why the repo ships no rules, the
+two decisions most likely to surprise you.
 
 ## Vocabulary
 
