@@ -14,7 +14,7 @@ and every line is yours to change before anything touches Chrome.
 
 - [Claude Code](https://claude.com/claude-code)
 - Google Chrome 134 or later
-- Python 3, standard library only
+- Python 3.10 or later, standard library only
 - Windows or macOS. Linux should work but is untested.
 - Node.js, only to run the extension's tests
 

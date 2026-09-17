@@ -42,16 +42,19 @@ manifest into the conversation; it can hold thousands of rows.
 One round, every question numbered, each with the relevant facts and your recommendation.
 Wait for the answers; ask a follow-up round only for answers that open a new question.
 
-1. **Bar shape**: how many top-level folders, and how deep. Base the suggestion on how many
-   distinct groups the high-`host_days` sites fall into, not on today's folder count.
-2. **Bar order**: alphabetical, by use, or a fixed order the user names.
+1. **Bar shape**: how many top-level folders, and how deep. Show today's folders with their
+   use, and how many distinct groups the high-`host_days` sites fall into. Folders with
+   little use may still be kept on purpose, so offer today's count as an option.
+2. **Bar order**: keep today's order (list it), alphabetical, by use, or an order the user
+   names.
 3. **Protected folders**: offer MOBILE folders, folders that look shared or belong to
-   someone else, and anything the user names. Paths start with BAR, OTHER or MOBILE.
+   someone else, and anything the user names. Paths start with BAR, OTHER or MOBILE. A
+   protected folder can receive nothing, so never protect the folder cold material goes to.
 4. **Untitled bar bookmarks**: only if there are any. Keep them as icon-only buttons?
 5. **Duplicates**: merge exact URL matches only, or near-duplicates too. Give both counts.
 6. **Cold material**: where rarely used bookmarks go (Other bookmarks, an archive folder,
    or deletion after review). Give the unvisited count, and say that no visits in the
-   window is not proof of disuse.
+   window is not proof of disuse. Never recommend moving bookmarks on visits alone.
 7. **Startup tabs** (optional): suggest the two or three highest-`host_days` sites as
    pages to open on startup. Say this is set in Chrome's settings, not by the plan.
 

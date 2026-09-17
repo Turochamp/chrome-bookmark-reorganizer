@@ -27,8 +27,9 @@ fall back to the example file's values.
 - Apply only through the extension. Never write `AccountBookmarks` or `Bookmarks`, and
   never tell the user to turn sync off. `docs/adr/0001-apply-through-the-extension.md`
   says why.
-- Visit counts decide how finely to split a folder and how to order it. They are never a
-  reason to delete: the history window misses seasonal and typed-URL use.
+- Visit counts decide how finely to split a folder and how to order it. On their own they
+  are never a reason to move, archive or delete a bookmark: the history window misses
+  seasonal and typed-URL use.
 - The user reviews the plan before `apply-plan.py --target`. Summarize what moves, what is
   deleted and what the bar will look like, and wait for their go-ahead.
 - `working/`, `extension/target.json` and `bookmark-rules.md` are personal. Never commit
